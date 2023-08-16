@@ -1,0 +1,78 @@
+import java.time.LocalDateTime
+
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.6.0'
+	id 'io.spring.dependency-management' version '1.1.2'
+}
+
+group = 'pl.connectapp'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+compileJava{
+	options.compilerArgs << '-parameters'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+task generatePostAndComment(){
+	doLast {
+		File dataSql = file("src/main/resources/data.sql")
+		dataSql.write("")
+
+		//posty
+		for (int i = 1; i <= 100; i++) {
+			dataSql.append("insert into post(id, title, content, created) " +
+					"values (${i}, 'Test post ${i}', 'Content ${i}', '" + LocalDateTime.now().minusDays(100 - i) + "');\n")
+		}
+
+		//komentarze
+		for (int i = 1; i <= 100; i++) {
+			int postId = 1 + i / 10
+			dataSql.append("insert into comment(id,post_id, content, created) " +
+					"values (${i}, ${postId}, 'Content ${i}', '" + LocalDateTime.now().minusDays(100 - i) + "');\n")
+		}
+
+		//pracodawca
+		for (int i = 1; i<=10; i++){
+			dataSql.append("insert into employee(id,name,surname,special) values " +
+					"(${i}, 'Name employee $i', 'Surname employee $i', 'Special $i');\n")
+		}
+
+		//pracownicy
+		for (int i = 1; i <= 50; i++) {
+			int employeeId = 1 + i / 10
+			dataSql.append("insert into worker(id, name, employee_id, special) " +
+					"values ($i,'Name worker $i' ,${employeeId}, 'Special $i');\n")
+		}
+
+	}
+}
