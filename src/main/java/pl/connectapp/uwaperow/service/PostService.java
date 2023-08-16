@@ -2,8 +2,8 @@ package pl.connectapp.uwaperow.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import pl.connectapp.uwaperow.controller.dto.PostDto;
 import pl.connectapp.uwaperow.model.Comment;
 import pl.connectapp.uwaperow.model.Post;
 import pl.connectapp.uwaperow.repository.CommentRepository;
@@ -22,17 +22,18 @@ public class PostService {
     private final CommentRepository commentRepository;
 
     //postronnicowane posty
-    public List<Post> getPosts(int page){
-        return postRepository.findAllPost(PageRequest.of(page, PageSIZE));
+    public List<Post> getPosts(int page, Sort.Direction sort){
+        return postRepository.findAllPost(
+                PageRequest.of(page, PageSIZE,
+                        Sort.by(sort, "id")));
     }
 
     public Post getSinglePost(long id) {
         return postRepository.findById(id).orElseThrow();
     }
 
-
-    public List<Post> getPostsWithComments(int page) {
-        List<Post> allPost = postRepository.findAllPost(PageRequest.of(page, PageSIZE));
+    public List<Post> getPostsWithComments(int page, Sort.Direction sort) {
+        List<Post> allPost = postRepository.findAllPost(PageRequest.of(page, PageSIZE, Sort.by(sort, "id")));
         List<Long> ids = allPost.stream()
                 .map(Post::getId).collect(Collectors.toList());
         List<Comment> comments = commentRepository.findAllByPostIdIn(ids);
