@@ -26,6 +26,18 @@ CREATE TABLE WORKER(
     SPECIAL VARCHAR(100)
 );
 
+CREATE TABLE vw_towar
+(
+    tw_id           bigint IDENTITY (1, 1) NOT NULL,
+    tw_symbol       varchar(255),
+    tw_nazwa        varchar(255),
+    st_mag_id       bigint,
+    st_stan         float(53),
+    tc_cena_brutto1 float(53),
+    CONSTRAINT pk_vwtowar PRIMARY KEY (tw_id)
+)
+    GO
+
 ALTER TABLE COMMENT
     ADD CONSTRAINT COMMENT_POSTID
     FOREIGN KEY (POST_ID) REFERENCES POST(ID);
