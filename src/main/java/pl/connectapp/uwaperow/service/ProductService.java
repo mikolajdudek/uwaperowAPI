@@ -3,10 +3,13 @@ package pl.connectapp.uwaperow.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.connectapp.uwaperow.model.Image;
 import pl.connectapp.uwaperow.model.Product;
 import pl.connectapp.uwaperow.repository.ProductRepository;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
