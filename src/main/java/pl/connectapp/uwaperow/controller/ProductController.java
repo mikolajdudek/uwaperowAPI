@@ -35,6 +35,8 @@ public class ProductController {
         return productService.getProductsById();
     }
 
+
+    //kod który skanuje strone w celu pozyskania zdj. oraz przypisuje zdj do nazwy
 /*
     @GetMapping("/all")
     public List<String> getAllImages() {
