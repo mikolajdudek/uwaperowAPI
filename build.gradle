@@ -11,7 +11,8 @@ group = 'pl.connectapp'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+	sourceCompatibility(JavaVersion.VERSION_11) // 17 ->11
+	targetCompatibility(JavaVersion.VERSION_11)  // 17-> 11
 }
 
 configurations {
