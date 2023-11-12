@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT $JAVA_OPTS -jar build/libs/uwaperow-0.0.1-SNAPSHOT-plain.jar
+web: java -Dserver.port=$PORT $JAVA_OPTS -Xms150M -jar build/libs/uwaperow-0.0.1-SNAPSHOT-plain.jar
