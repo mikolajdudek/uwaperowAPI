@@ -12,13 +12,13 @@ java {
 	sourceCompatibility = 1.8
 }
 
-jar {
-	manifest {
-		attributes(
-				'Main-Class': 'pl.connectapp.uwaperow.UwaperowApplication'
-		)
-	}
-}
+//jar {
+//	manifest {
+//		attributes(
+//				'Main-Class': 'pl.connectapp.uwaperow.UwaperowApplication'
+//		)
+//	}
+//}
 
 
 
@@ -41,7 +41,6 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
 	compileOnly 'org.projectlombok:lombok'
 	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
