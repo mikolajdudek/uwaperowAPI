@@ -7,7 +7,7 @@ plugins {
 
 group = 'pl.connectapp'
 version = '0.0.1-SNAPSHOT'
-build.mustRunAfter clean
+
 java {
 	sourceCompatibility = 1.8
 }
