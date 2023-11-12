@@ -1,1 +1,1 @@
-web: gradlew build && java -jar build/libs/connectapp-0.0.1-SNAPSHOT.jar
+web: java $java_opts -jar app.jar
